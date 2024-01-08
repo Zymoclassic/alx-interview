@@ -1,8 +1,14 @@
 def canUnlockAll(boxes):
+    #keep track of visited boxes
     visited = set()
+
+    #To perform first index search
     queue = [0]
+
+    #update visited
     visited.add(0)
 
+    #A loop to perform the search
     while queue:
         current_box = queue.pop(0)
 
