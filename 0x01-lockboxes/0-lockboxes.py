@@ -1,22 +1,32 @@
 #!/usr/bin/python3
+'''LockBoxes Challenge'''
+
 
 def canUnlockAll(boxes):
-    """keep track of visited boxes"""
-    visited = set()
+    '''determines if all the boxes can be opened or not
+    Returns:
+        True: all boxes can be opened
+        False: not all boxes can be opened
+    '''
+    length = len(boxes)
+    keys = set()
+    opened_boxes = []
+    i = 0
 
-    """To perform first index search"""
-    queue = [0]
+    while i < length:
+        oldi = i
+        opened_boxes.append(i)
+        keys.update(boxes[i])
+        for key in keys:
+            if key != 0 and key < length and key not in opened_boxes:
+                i = key
+                break
+        if oldi != i:
+            continue
+        else:
+            break
 
-    """update visited"""
-    visited.add(0)
-
-    """A loop to perform the search"""
-    while queue:
-        current_box = queue.pop(0)
-
-        for key in boxes[current_box]:
-            if key < len(boxes) and key not in visited:
-                visited.add(key)
-                queue.append(key)
-
-    return len(visited) == len(boxes)
+    for i in range(length):
+        if i not in opened_boxes and i != 0:
+            return False
+    return True
